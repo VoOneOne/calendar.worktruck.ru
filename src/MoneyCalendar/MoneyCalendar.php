@@ -12,6 +12,10 @@ class MoneyCalendar
     }
     public function json()
     {
+        return json_encode($this->array());
+    }
+    public function array()
+    {
         $moneyCalendar = [];
         for ($i = 1; $i < $this->calendarTable->dayWeekBegMonth(); $i++) {
             $moneyCalendar[] = [];
@@ -24,6 +28,6 @@ class MoneyCalendar
         for($i = $this->calendarTable->dayWeekEndMonth() + 1; $i <= 7; $i++){
             $moneyCalendar[] = [];
         }
-        return json_encode($moneyCalendar, JSON_NUMERIC_CHECK);
+        return  $moneyCalendar;
     }
 }

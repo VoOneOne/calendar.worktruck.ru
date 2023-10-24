@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        .container {
+            width: 1100px;
+            margin: 0 auto;
+        }
+
+        .calendar {
+            width: 1070px;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+
+        }
+
+        .days {
+            display: flex;
+            width: 1070px;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+
+        .one-day {
+            width: 150px;
+            height: 150px;
+            border: 1px solid black;
+        }
+
+        .two-day {
+            width: 150px;
+            height: 150px;
+            background-color: orangered;
+        }
+
+        .day {
+            width: 50px;
+            height: 50px;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .number_day {
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        .weak {
+            display: flex;
+        }
+
+        .weak p {
+            width: 150px;
+            text-align: center;
+            padding: 5px 0;
+            margin-top: 15px;
+        }
+
+        .red {
+            background-color: #FF6633;
+        }
+
+        .green {
+            background-color: #99CC99;
+        }
+
+        .blue {
+            background-color: #56a5f0;
+        }
+
+        .params {;
+        }
+
+        .color_number {
+            display: flex;
+            justify-content: end;
+            padding-right: 10px;
+            color: #fff;
+        }
+        .month {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            margin-top: 20px;
+        }
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: row;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="calendar">
+        <div class="nav">
+            <div class="arrow-left"><a href="{{ arrow.left.link }}"><-</a></div>
+            <div class="month">{{ monthName }}</div>
+            <div class="arrow-right"><a href="{{ arrow.right.link }}">-></a></div>
+        </div>
+
+        <div class="weak">
+            <p class='blue'>Понедельник</p>
+            <p class='blue'>Вторник</p>
+            <p class='blue'>Среда</p>
+            <p class='blue'>Четверг</p>
+            <p class='blue'>Пятница</p>
+            <p class="red">Суббота</p>
+            <p class="red">Воскресение</p>
+        </div>
+        <div class="days">
+            {% for cell in calendarTable %}
+                <div class="one-day">
+                    {% if cell.day is defined %}
+                    <div class="day">
+                        <p class="number_day">{{ cell.day }}</p>
+                    </div>
+                    {% endif %}
+                    <div class="params">
+
+                        {% if cell.prihfact is defined %}
+                            <p class="color_number green">+{{ cell.prihfact }}</p>
+                        {% else %}
+                            <p class="color_number">-</p>
+                        {% endif %}
+
+                        {% if cell.rasfact is defined %}
+                            <p class="color_number red">-{{ cell.rasfact }}</p>
+                        {% else %}
+                            <p class="color_number">-</p>
+                        {% endif %}
+
+                        {% if cell.prihplan is defined %}
+                            <p class="color_number green">+{{ cell.prihplan }}</p>
+                        {% else %}
+                            <p class="color_number">-</p>
+                        {% endif %}
+
+                        {% if cell.rasplan is defined %}
+                            <p class="color_number red">-{{ cell.rasplan }}</p>
+                        {% else %}
+                            <p class="color_number">-</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</body>
+</html>
